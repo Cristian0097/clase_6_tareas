@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Tarea clase 6</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href="main.css">
+</head>
+
+<body>
+    <form id="calculador-de-edades">
+        <label>¿Cuantas personas hay en su grupo familiar?</label>
+        <input type="number" id="numero-de-familiares">
+        <button id="aceptar">Aceptar</button>
+        <div>
+            <label id="label-ingresar-edades" class="oculto">Ingrese las edades de sus familiares</label>
+        </div>
+
+        <div id="integrantes">
+
+        </div>
+
+        <button id="boton-calcular" class="oculto">Calcular</button>
+
+        <div id="resultados">
+            <div id="mayor-edad"></div>
+            <div id="menor-edad"></div>
+            <div id="promedio-edades"></div>
+        </div>
+
+        <button type="reset" id="resetear" class="oculto">Resetear</button>
+    </form>
+</body>
+<script src="calculos.js"></script>
+<script src='tarea_clase_6.js'></script>
+
+</html>
