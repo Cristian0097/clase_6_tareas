@@ -7,14 +7,14 @@ $botonAceptar.onclick = function () {
     ocultarBotonCalcular()
     ocultarLabel()
 
-    if ($numeroDeFamiliares.value > 0){
+    if ($numeroDeFamiliares.value > 0) {
         mostrarLabel()
         crearIntegrantes()
         mostrarBotonCalcular()
     } else {
 
     }
-    
+
     return false
 }
 
@@ -24,7 +24,9 @@ document.querySelector("#boton-calcular").onclick = function () {
     let arrayEdades = []
 
     for (let i = 0; i < listaEdades.length; i++) {
-        arrayEdades.push(Number(listaEdades[i].value))
+        if (listaEdades[i].value != "" || listaEdades[i].value != 0) {
+            arrayEdades.push(Number(listaEdades[i].value))
+        }
     }
 
     let edadMenor = document.querySelector("#menor-edad")
@@ -76,7 +78,7 @@ function crearIntegrantes() {
     }
 }
 
-function borrarIntegrantes(){
+function borrarIntegrantes() {
     let $integrantes = document.querySelectorAll(".integrante")
 
     for (let i = 0; i < $integrantes.length; i++) {
