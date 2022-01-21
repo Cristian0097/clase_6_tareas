@@ -10,7 +10,7 @@ function probarValidarIntegrantes (){
     )
 
     console.assert(
-        validarNumeros('0') === 'El numero no puede ser 0 ni un valor negativo',
+        validarNumeros('0') === 'El numero no puede ser 0, ni un valor negativo, ni vacio',
         'Validar numeros no validó que el numero de integrantes no sea 0'
     )
 

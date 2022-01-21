@@ -27,30 +27,36 @@ document.querySelector("#boton-calcular").onclick = function () {
     let $listaEdades = document.querySelectorAll("#edades-de-familiares")
     let arrayEdades = []
 
-    let erroes = 0
-    $listaEdades.forEach(function(edad){
+    let errores = 0
 
+    $listaEdades.forEach(function (edad) {
+        if (validarNumeros(edad.value)) {
+            errores++
+            edad.className = 'error'
+        } else {
+            edad.className = ''
+        }
     })
 
+    let esExito = errores === 0
 
-    console.log(arrayEdades)
+    if (esExito) {
 
+        for (let i = 0; i < $listaEdades.length; i++) {
+            arrayEdades.push(Number($listaEdades[i].value))
+        }
 
+        let edadMenor = document.querySelector("#menor-edad")
+        edadMenor.textContent = `La edad más pequeña es ${encontrarEdadMenor(arrayEdades)}`
 
-    //for (let i = 0; i < listaEdades.length; i++) {
-    //    arrayEdades.push(Number(listaEdades[i].value))
-    //}
-//
-    //let edadMenor = document.querySelector("#menor-edad")
-    //edadMenor.textContent = `La edad más pequeña es ${encontrarEdadMenor(arrayEdades)}`
-//
-    //let edadMayor = document.querySelector("#mayor-edad")
-    //edadMayor.textContent = `La edad más grande es ${encontrarEdadMayor(arrayEdades)}`
-//
-    //let promedioEdades = document.querySelector("#promedio-edades")
-    //promedioEdades.textContent = `El promedio de edades es ${calcularPromedio(arrayEdades)}`
-//
-    //mostrarBotonResetear()
+        let edadMayor = document.querySelector("#mayor-edad")
+        edadMayor.textContent = `La edad más grande es ${encontrarEdadMayor(arrayEdades)}`
+
+        let promedioEdades = document.querySelector("#promedio-edades")
+        promedioEdades.textContent = `El promedio de edades es ${calcularPromedio(arrayEdades)}`
+    }
+
+    console.log(errores)
 
     return false
 }

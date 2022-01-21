@@ -38,15 +38,11 @@ function validarNumeros($numeros) {
 
     } else if ($numeros + 1 <= 1) {
 
-        return 'El numero no puede ser 0 ni un valor negativo'
+        return 'El numero no puede ser 0, ni un valor negativo, ni vacio'
 
     } else {
 
         return ''
 
     }
-}
-
-function validarEdades() {
-
 }
