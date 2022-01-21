@@ -1,48 +1,65 @@
-const $numeroDeFamiliares = document.querySelector("#numero-de-familiares")
+
 const $botonAceptar = document.querySelector("#aceptar")
 
 $botonAceptar.onclick = function () {
+    const $numeroDeFamiliares = document.querySelector("#numero-de-familiares").value
 
     borrarIntegrantes()
     ocultarBotonCalcular()
     ocultarLabel()
 
-    if ($numeroDeFamiliares.value > 0) {
-        mostrarLabel()
-        crearIntegrantes()
-        mostrarBotonCalcular()
-    } else {
+    let errorIntegrantes = validarNumeros($numeroDeFamiliares)
 
+    let esExito = manejarErrores(errorIntegrantes) === 0
+
+    if (esExito) {
+
+        crearIntegrantes($numeroDeFamiliares)
+        mostrarBotonCalcular()
+        mostrarBotonResetear()
     }
 
     return false
 }
-
 
 document.querySelector("#boton-calcular").onclick = function () {
-    let listaEdades = document.querySelectorAll("#edades-de-familiares")
+
+    let $listaEdades = document.querySelectorAll("#edades-de-familiares")
     let arrayEdades = []
 
-    for (let i = 0; i < listaEdades.length; i++) {
-        if (listaEdades[i].value != "" || listaEdades[i].value != 0) {
-            arrayEdades.push(Number(listaEdades[i].value))
+    let errores = 0
+
+    $listaEdades.forEach(function (edad) {
+        if (validarNumeros(edad.value)) {
+            errores++
+            edad.className = 'error'
+        } else {
+            edad.className = ''
         }
+    })
+
+    let esExito = errores === 0
+
+    if (esExito) {
+
+        for (let i = 0; i < $listaEdades.length; i++) {
+            arrayEdades.push(Number($listaEdades[i].value))
+        }
+
+        let edadMenor = document.querySelector("#menor-edad")
+        edadMenor.textContent = `La edad más pequeña es ${encontrarEdadMenor(arrayEdades)}`
+
+        let edadMayor = document.querySelector("#mayor-edad")
+        edadMayor.textContent = `La edad más grande es ${encontrarEdadMayor(arrayEdades)}`
+
+        let promedioEdades = document.querySelector("#promedio-edades")
+        promedioEdades.textContent = `El promedio de edades es ${calcularPromedio(arrayEdades)}`
     }
 
-    let edadMenor = document.querySelector("#menor-edad")
-    edadMenor.textContent = `La edad más pequeña es ${encontrarEdadMenor(arrayEdades)}`
-
-    let edadMayor = document.querySelector("#mayor-edad")
-    edadMayor.textContent = `La edad más grande es ${encontrarEdadMayor(arrayEdades)}`
-
-    let promedioEdades = document.querySelector("#promedio-edades")
-    promedioEdades.textContent = `El promedio de edades es ${calcularPromedio(arrayEdades)}`
-
-    mostrarBotonResetear()
+    console.log(errores)
 
     return false
 }
-
 
 document.querySelector("#resetear").onclick = function () {
     $botonAceptar.disabled = false
@@ -59,11 +76,11 @@ document.querySelector("#resetear").onclick = function () {
     ocultarBotonCalcular()
 }
 
-function crearIntegrantes() {
+function crearIntegrantes($numeroDeFamiliares) {
     let $divIntegrantes = document.querySelector("#integrantes")
     let numeroIntegrante = 1
 
-    for (let i = $numeroDeFamiliares.value; i >= 1; i--) {
+    for (let i = $numeroDeFamiliares; i >= 1; i--) {
         let integrante = document.createElement("div")
         integrante.className = "integrante"
         let labelIntegrante = document.createElement("label")
