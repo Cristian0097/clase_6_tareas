@@ -7,12 +7,15 @@ $botonAceptar.onclick = function () {
     ocultarBotonCalcular()
     ocultarLabel()
 
-    if ($numeroDeFamiliares.value > 0) {
-        mostrarLabel()
-        crearIntegrantes()
-        mostrarBotonCalcular()
-    } else {
+    let errorIntegrantes = validarNumeros($numeroDeFamiliares)
 
+    let esExito = manejarErrores(errorIntegrantes) === 0
+
+    if (esExito) {
+
+        crearIntegrantes($numeroDeFamiliares)
+        mostrarBotonCalcular()
+        mostrarBotonResetear()
     }
 
     return false
